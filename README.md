@@ -2,6 +2,8 @@
 
 Soul Fitness is a comprehensive gym management system. This project is the backend API that powers the Soul Fitness ecosystem.
 
+> **Project Note**: This system has been successfully hosted and in active production use within a major airline's corporate gym environment since 2023. This repository represents a modernized and refactored version of that battle-tested codebase.
+
 ## Features
 
 - **Coaches Management**: Track coach details, attendance, and schedules.
