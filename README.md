@@ -19,18 +19,19 @@ Soul Fitness is a comprehensive gym management system. This project is the backe
 - **Framework**: .NET 9.0 (ASP.NET Core Web API)
 - **Database**: SQL Server with Entity Framework Core
 - **Documentation**: Swagger UI
-- **Task Scheduling**: Hangfire
 - **Logging**: Custom Utility logging
 - **Export/Import**: ClosedXML, CsvHelper
+- **Containerization**: Docker & Docker Compose
+- **CI/CD**: GitHub Actions
 
 ## Getting Started
 
 ### Prerequisites
 
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Optional for containerized run)
 
-### Installation
+### Installation (Local)
 
 1. Clone the repository.
 2. Update the connection string in `appsettings.json`.
@@ -43,10 +44,18 @@ Soul Fitness is a comprehensive gym management system. This project is the backe
    dotnet run --project SoulFitness.Web
    ```
 
+### Installation (Docker)
+
+To run the entire ecosystem (API + SQL Server):
+```bash
+docker-compose up --build
+```
+The API will be available at `http://localhost:1625/swagger`.
+
 ### API Documentation
 
 Once the application is running, you can access the Swagger UI at:
-`http://localhost:1625/swagger/index.html` (or the configured port)
+`http://localhost:1625/swagger/index.html`
 
 ## Testing
 
@@ -55,6 +64,10 @@ To run the tests:
 ```bash
 dotnet test
 ```
+
+## Postman Collection
+
+A Postman collection is included in the root directory: `SoulFitness_API_Collection.json`. Import this into Postman to start testing the endpoints immediately.
 
 ## Contributing
 
