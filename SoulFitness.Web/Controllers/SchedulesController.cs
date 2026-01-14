@@ -16,8 +16,9 @@ using SoulFitness.DataObjects;
 
 namespace SoulFitness.Web.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class SchedulesController : ControllerBase
     {
         private readonly ApplicationDbContext applicationDbContext;
@@ -47,7 +48,6 @@ namespace SoulFitness.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] Schedules sched)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             if (await applicationDbContext.Schedule.AnyAsync(i => i.TimeInterval == sched.TimeInterval))
             {
@@ -70,9 +70,7 @@ namespace SoulFitness.Web.Controllers
         {
             if (id != sched.Id) return BadRequest("ID mismatch.");
 
-            if (ModelState.IsValid)
-            {
-                try
+            try
                 {
                     var loggedInUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                     var loggedInUser = await userManager.FindByIdAsync(loggedInUserId);
@@ -89,8 +87,6 @@ namespace SoulFitness.Web.Controllers
                     if (!applicationDbContext.Schedule.Any(e => e.Id == id)) return NotFound();
                     throw;
                 }
-            }
-            return BadRequest(ModelState);
         }
 
         [HttpDelete("{id}")]

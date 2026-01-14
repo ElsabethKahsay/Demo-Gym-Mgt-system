@@ -17,6 +17,11 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Asp.Versioning;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using SoulFitness.Web.Middleware;
+using SoulFitness.DataObjects.Validators;
 
 namespace SoulFitness.web
 {
@@ -40,6 +45,20 @@ namespace SoulFitness.web
                 );
 
             services.AddControllers();
+
+            services.AddApiVersioning(options =>
+            {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+            }).AddApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<UserCreateDtoValidator>();
 
             services.AddSwaggerGen(c =>
             {
@@ -85,6 +104,8 @@ namespace SoulFitness.web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
+            app.UseMiddleware<ExceptionMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

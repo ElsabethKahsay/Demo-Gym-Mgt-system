@@ -18,8 +18,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SoulFitness.Web.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class MisconductLogController : ControllerBase
     {
         private readonly ApplicationDbContext applicationDbContext;

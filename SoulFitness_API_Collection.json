@@ -2,7 +2,7 @@
     "info": {
         "_postman_id": "76e3d2a7-ea8d-4f1b-a667-dbd123456789",
         "name": "Soul Fitness API",
-        "description": "Postman collection for Soul Fitness Gym Management API",
+        "description": "Postman collection for Soul Fitness Gym Management API (v1)",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -15,12 +15,13 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "{{baseUrl}}/api/Users",
+                            "raw": "{{baseUrl}}/api/v1/Users",
                             "host": [
                                 "{{baseUrl}}"
                             ],
                             "path": [
                                 "api",
+                                "v1",
                                 "Users"
                             ]
                         }
@@ -42,12 +43,13 @@
                             "raw": "{\n    \"user\": {\n        \"userName\": \"test.runner\",\n        \"email\": \"test@example.com\",\n        \"firstName\": \"Test\",\n        \"lastName\": \"Runner\"\n    },\n    \"roles\": [\"Admin\"]\n}"
                         },
                         "url": {
-                            "raw": "{{baseUrl}}/api/Users",
+                            "raw": "{{baseUrl}}/api/v1/Users",
                             "host": [
                                 "{{baseUrl}}"
                             ],
                             "path": [
                                 "api",
+                                "v1",
                                 "Users"
                             ]
                         }
@@ -60,17 +62,18 @@
             "name": "Schedules",
             "item": [
                 {
-                    "name": "Get All Schedules",
+                    "name": "Get All Schedules (v1)",
                     "request": {
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "{{baseUrl}}/api/Schedules",
+                            "raw": "{{baseUrl}}/api/v1/Schedules",
                             "host": [
                                 "{{baseUrl}}"
                             ],
                             "path": [
                                 "api",
+                                "v1",
                                 "Schedules"
                             ]
                         }

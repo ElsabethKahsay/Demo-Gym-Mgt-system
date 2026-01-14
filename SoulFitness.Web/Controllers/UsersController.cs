@@ -21,8 +21,9 @@ using SoulFitness.DataObjects;
 
 namespace SoulFitness.Web.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext applicationDbContext;
@@ -66,7 +67,6 @@ namespace SoulFitness.Web.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody] LoginViewModel model)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, false, lockoutOnFailure: false);
             if (result.Succeeded)
@@ -97,7 +97,6 @@ namespace SoulFitness.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] UserCreateDto dto)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var user = dto.User;
             if (await applicationDbContext.Users.AnyAsync(i => i.UserName == user.UserName))

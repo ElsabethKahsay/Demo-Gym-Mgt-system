@@ -17,8 +17,9 @@ using SoulFitness.DataObjects;
 
 namespace SoulFitness.Web.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class EmployeesController : ControllerBase
     {
         private readonly ApplicationDbContext applicationDbContext;

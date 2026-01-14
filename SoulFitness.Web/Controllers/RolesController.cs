@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace SoulFitness.Web.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class RolesController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -40,7 +41,6 @@ namespace SoulFitness.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] RoleViewModel model, [FromQuery] string privilegeIds)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
             if (string.IsNullOrEmpty(privilegeIds)) return BadRequest("At least one privilege is required.");
 
             if (await roleManager.RoleExists(model.RoleName))
@@ -81,7 +81,6 @@ namespace SoulFitness.Web.Controllers
         [HttpPut("{oldName}")]
         public async Task<ActionResult> Edit(string oldName, [FromBody] RoleViewModel model, [FromQuery] string privilegeIds)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var role = await context.Roles.FirstOrDefaultAsync(x => x.Name == oldName);
             if (role == null) return NotFound("Role not found.");

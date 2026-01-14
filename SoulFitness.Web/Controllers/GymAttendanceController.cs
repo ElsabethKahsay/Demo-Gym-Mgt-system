@@ -15,8 +15,9 @@ using DocumentFormat.OpenXml.Drawing.Charts;
 
 namespace SoulFitness.Web.Controllers
 {
+    [ApiVersion("1.0")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class GymAttendanceController : ControllerBase
     {
         private readonly ApplicationDbContext applicationDbContext;
