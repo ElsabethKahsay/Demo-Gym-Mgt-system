@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  soulfitness-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: soulfitness-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Password123
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql
+
+  soulfitness-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: soulfitness-api
+    depends_on:
+      - soulfitness-db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__SoulFitnessConnection=Server=soulfitness-db;Database=SoulFitness;User Id=sa;Password=YourStrong@Password123;TrustServerCertificate=True
+    ports:
+      - "1625:80"
+    volumes:
+      - ./SoulFitness.Web/FileUploads:/app/FileUploads
+
+volumes:
+  sql-data:
