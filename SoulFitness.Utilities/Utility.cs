@@ -12,10 +12,16 @@ namespace SoulFitness.Utilities
     {
         public static bool WriteLog(string log)
         {
-            StreamWriter writer = new StreamWriter("C:\\EthiopianServices\\SoulfFitness\\" + "_SoulfFitness" + " " + DateTime.Now.ToString("yyyy-MM-ddThh tt") + ".txt", true);
-            writer.WriteLine(log);
-            writer.Close();
-            return true;
+            try
+            {
+                string baseDir = AppContext.BaseDirectory;
+                string path = Path.Combine(baseDir, "Logs");
+                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                string filePath = Path.Combine(path, $"SoulFitness_{DateTime.Now:yyyy-MM-dd}.txt");
+                File.AppendAllText(filePath, log + Environment.NewLine);
+                return true;
+            }
+            catch { return false; }
         }
     }
 

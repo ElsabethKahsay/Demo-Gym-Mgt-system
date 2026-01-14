@@ -11,8 +11,7 @@ using SoulFitness.DataObjects.Data;
 using SoulFitness.DataObjects.UserManagment.Identity;
 using SoulFitness.DataObjects.UserManagment.Services;
 using SoulFitness.Utilities;
-//using Hangfire;
-using Hangfire.SqlServer;
+
 using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -115,6 +114,8 @@ namespace SoulFitness.web
             {
                 endpoints.MapControllers();
             });
+
+            dbInitializer.Initialize();
         }
     }
 }
